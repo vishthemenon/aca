@@ -13,18 +13,18 @@ import star.meshing.*;
 
 public class ultimate_macro_b3 extends StarMacro {
 
-  static String rootPath = "\\\\icnas1.cc.ic.ac.uk\\vr616\\Desktop\\ACA\\CW2\\real_shit\\data\\AOA3\\";
+  static String rootPath = "\\\\icnas1.cc.ic.ac.uk\\vr616\\Desktop\\ACA\\CW2\\real_shit\\data\\AOA4\\";
 
   public void execute() {
     int iterations = 2000;
     double nearWallThickness = 4.16e-5/14.551/1.4;
-    int prismLayers = 15;
+    int prismLayers = 25;
     double prismLayerThickness = 0.0233;
     double baseSize = 0.005;
     double radius = 50;
 
     for(int i = 0; i <= 11; i += 1) {
-      double AOA = 1/-180.0*3.14159265359;
+      double AOA = -1/180.0*3.14159265359;
 
       execute0(
         iterations,
