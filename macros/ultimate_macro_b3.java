@@ -1,4 +1,4 @@
-// STAR-CCM+ macro: ultimate_macro.java
+// STAR-CCM+ macro: ultimate_macro_b3.java
 // Written by STAR-CCM+ 13.04.011
 package macro;
 
@@ -11,30 +11,32 @@ import star.vis.*;
 import star.cadmodeler.*;
 import star.meshing.*;
 
-public class ultimate_macro extends StarMacro {
+public class ultimate_macro_b3 extends StarMacro {
 
-  static String rootPath = "\\\\icnas1.cc.ic.ac.uk\\vr616\\Desktop\\ACA\\CW2\\real_shit\\data\\AOA2\\";
+  static String rootPath = "\\\\icnas1.cc.ic.ac.uk\\vr616\\Desktop\\ACA\\CW2\\real_shit\\data\\AOA3\\";
 
   public void execute() {
-    int iterations = 1000;
+    int iterations = 2000;
     double nearWallThickness = 4.16e-5/14.551/1.4;
     int prismLayers = 15;
     double prismLayerThickness = 0.0233;
     double baseSize = 0.005;
     double radius = 50;
 
-    execute0(
-      iterations,
-      nearWallThickness,
-      prismLayers,
-      prismLayerThickness,
-      baseSize,
-      radius,
-      4
-      // AOA
-      );
+    for(double i = 0.0; i < 10.0; i += 1.0) {
+      double AOA = i/-180.0*3.14159265359;
 
-      System.out.println("ZSXRKJHBNGVUDBVASBABSUABHSBKUABKU");
+      execute0(
+        iterations,
+        nearWallThickness,
+        prismLayers,
+        prismLayerThickness,
+        baseSize,
+        radius,
+        (int)AOA,
+        AOA
+        );
+    }
   }
 
   private String concatFilePath(String fileName, int fileSuffix) {
@@ -48,7 +50,8 @@ public class ultimate_macro extends StarMacro {
     double prismLayerThickness,
     double baseSize,
     double radius,
-    int fileSuffix) {
+    int fileSuffix,
+    double AOA) {
 
     Simulation simulation_0 =
       getActiveSimulation();
@@ -56,8 +59,19 @@ public class ultimate_macro extends StarMacro {
     Solution solution_0 =
       simulation_0.getSolution();
 
+    Units units_1 =
+      simulation_0.getUnitsManager().getPreferredUnits(new IntVector(new int[] {0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}));
 
-    solution_0.clearSolution(Solution.Clear.History, Solution.Clear.Fields, Solution.Clear.LagrangianDem);
+    SolidModelPart solidModelPart_0 =
+      ((SolidModelPart) simulation_0.get(SimulationPartManager.class).getPart("aerofoil"));
+
+    LabCoordinateSystem labCoordinateSystem_0 =
+      simulation_0.getCoordinateSystemManager().getLabCoordinateSystem();
+
+    simulation_0.get(SimulationPartManager.class).rotateParts(new NeoObjectVector(new Object[] {solidModelPart_0}), new DoubleVector(new double[] {0.0, 0.0, 1.0}), new NeoObjectVector(new Object[] {units_1, units_1, units_1}), AOA, labCoordinateSystem_0);
+
+
+    solution_0.clearSolution(Solution.Clear.History);
 
     StepStoppingCriterion stepStoppingCriterion_0 =
       ((StepStoppingCriterion) simulation_0.getSolverStoppingCriterionManager().getSolverStoppingCriterion("Maximum Steps"));
