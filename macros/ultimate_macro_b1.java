@@ -21,8 +21,8 @@ public class ultimate_macro_b1 extends StarMacro {
     int prismLayers = 15;
     double prismLayerThickness = 0.0233;
     double baseSize = 0.01;
-    double radius = 1;
-    while(radius <= 20) {
+    double radius = 110;
+    while(radius <= 200) {
       execute0(
         iterations,
         nearWallThickness,
@@ -33,7 +33,7 @@ public class ultimate_macro_b1 extends StarMacro {
         (int)radius
         );
 
-      radius += 1;
+      radius += 10;
     }
   }
 

@@ -13,15 +13,15 @@ import star.meshing.*;
 
 public class ultimate_macro extends StarMacro {
 
-  static String rootPath = "\\\\icnas1.cc.ic.ac.uk\\vr616\\Desktop\\ACA\\CW2\\real_shit\\data\\";
+  static String rootPath = "\\\\icnas1.cc.ic.ac.uk\\vr616\\Desktop\\ACA\\CW2\\real_shit\\data\\temp\\";
 
   public void execute() {
     int iterations = 300;
     double nearWallThickness = 4.16e-5/14.551;
     int prismLayers = 15;
     double prismLayerThickness = 0.0233;
-    double baseSize = 0.01;
-    double radius = 50;
+    double baseSize = 0.001;
+    double radius = 90;
 
     execute0(
       iterations,
@@ -53,17 +53,17 @@ public class ultimate_macro extends StarMacro {
     Solution solution_0 =
       simulation_0.getSolution();
 
-    Units units_1 =
-      simulation_0.getUnitsManager().getPreferredUnits(new IntVector(new int[] {0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}));
-
-    SolidModelPart solidModelPart_0 =
-      ((SolidModelPart) simulation_0.get(SimulationPartManager.class).getPart("aerofoil"));
-
-    LabCoordinateSystem labCoordinateSystem_0 =
-      simulation_0.getCoordinateSystemManager().getLabCoordinateSystem();
-
-    simulation_0.get(SimulationPartManager.class).rotateParts(new NeoObjectVector(new Object[] {solidModelPart_0}), new DoubleVector(new double[] {0.0, 0.0, 1.0}), new NeoObjectVector(new Object[] {units_1, units_1, units_1}), 0.0349065850398866, labCoordinateSystem_0);
-
+    // Units units_1 =
+    //   simulation_0.getUnitsManager().getPreferredUnits(new IntVector(new int[] {0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}));
+    //
+    // SolidModelPart solidModelPart_0 =
+    //   ((SolidModelPart) simulation_0.get(SimulationPartManager.class).getPart("aerofoil"));
+    //
+    // LabCoordinateSystem labCoordinateSystem_0 =
+    //   simulation_0.getCoordinateSystemManager().getLabCoordinateSystem();
+    //
+    // simulation_0.get(SimulationPartManager.class).rotateParts(new NeoObjectVector(new Object[] {solidModelPart_0}), new DoubleVector(new double[] {0.0, 0.0, 1.0}), new NeoObjectVector(new Object[] {units_1, units_1, units_1}), 0.0349065850398866, labCoordinateSystem_0);
+    //
 
     solution_0.clearSolution(Solution.Clear.History, Solution.Clear.Fields, Solution.Clear.LagrangianDem);
 
