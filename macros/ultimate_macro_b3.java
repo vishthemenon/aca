@@ -23,8 +23,8 @@ public class ultimate_macro_b3 extends StarMacro {
     double baseSize = 0.005;
     double radius = 50;
 
-    for(double i = 0.0; i < 10.0; i += 1.0) {
-      double AOA = i/-180.0*3.14159265359;
+    for(int i = 0; i <= 11; i += 1) {
+      double AOA = 1/-180.0*3.14159265359;
 
       execute0(
         iterations,
@@ -33,7 +33,7 @@ public class ultimate_macro_b3 extends StarMacro {
         prismLayerThickness,
         baseSize,
         radius,
-        (int)AOA,
+        (int)i,
         AOA
         );
     }
